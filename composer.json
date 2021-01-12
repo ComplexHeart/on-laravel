@@ -1,0 +1,42 @@
+{
+  "name": "othercode/complex-heart-on-laravel",
+  "description": "Domain driven design tools for Laravel.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Unay Santisteban",
+      "email": "usantisteban@othercode.es"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": "^7.4|^8.0",
+    "ext-json": "*",
+    "ramsey/uuid": "^4.1",
+    "nesbot/carbon": "^2.40",
+    "laravel/framework": "^8.12"
+  },
+  "require-dev": {
+    "ext-xdebug": "*",
+    "mockery/mockery": "^1.4",
+    "phpunit/phpunit": "^9.3",
+    "fakerphp/faker": "^1.9.1",
+    "phpstan/phpstan": "^0.12.64"
+  },
+  "autoload": {
+    "psr-4": {
+      "OtherCode\\ComplexHeartOnLaravel\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "OtherCode\\ComplexHeartOnLaravel\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit --configuration phpunit.xml --testdox",
+    "test-cov": "phpunit --configuration phpunit.xml --testdox --coverage-html=coverage",
+    "analyse": "php -d memory_limit=4G vendor/bin/phpstan analyse src --no-progress"
+  }
+}
