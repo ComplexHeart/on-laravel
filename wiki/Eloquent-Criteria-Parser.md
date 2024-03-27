@@ -4,7 +4,7 @@ Using the Eloquent Criteria Parser is quite simple. Just instantiate the class, 
 the `applyCriteria()` method along with a `EloquentQueryBuilder` instance:
 
 ```php
-$parser = new BasicCriteriaParser();
+$parser = new EloquentCriteriaParser();
 $query = $parser->applyCriteria(User::query(), $criteria);
 ```
 
@@ -18,7 +18,7 @@ $users = $query->get();
 Alternatively, you can pass an array of strings to map the attributes between the domain and the database.
 
 ```php
-$parser = new BasicCriteriaParser([
+$parser = new EloquentCriteriaParser([
     'domain-attribute' => 'database-attribute',
 ]);
 ```
@@ -40,7 +40,7 @@ $this->builder->create('users', function (Blueprint $table) {
 You may use the following configuration to use `name` and `surname` instead of `first_name` and `last_name`:
 
 ```php
-$parser = new BasicCriteriaParser([
+$parser = new EloquentCriteriaParser([
     'name' => 'first_name',
     'surname' => 'last_name'
 ]);
@@ -55,7 +55,7 @@ $criteria = Criteria::default()
 
 $builder = User::query();
 
-$parser = new BasicCriteriaParser();
+$parser = new EloquentCriteriaParser();
 $users = $parser
     ->applyCriteria($builder, $criteria)
     ->get();
