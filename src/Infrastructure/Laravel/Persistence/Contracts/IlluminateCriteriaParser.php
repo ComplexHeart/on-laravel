@@ -8,12 +8,12 @@ use ComplexHeart\Domain\Criteria\Criteria;
 use Illuminate\Contracts\Database\Query\Builder;
 
 /**
- * Interface EloquentCriteriaParser
+ * Interface IlluminateCriteriaParser
  *
  * @author Unay Santisteban <usantisteban@othercode.io>
  * @package ComplexHeart\Infrastructure\Laravel\Persistence\Contracts
  */
-interface EloquentCriteriaParser
+interface IlluminateCriteriaParser
 {
     /**
      * Apply a criteria into the given QueryBuilder.

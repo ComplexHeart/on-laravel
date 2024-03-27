@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace ComplexHeart\Tests\Fixtures\Infrastructure\Persistence\Laravel;
 
 use ComplexHeart\Domain\Criteria\Criteria;
-use ComplexHeart\Infrastructure\Laravel\Persistence\BasicCriteriaParser;
-use ComplexHeart\Infrastructure\Laravel\Persistence\Contracts\EloquentCriteriaParser;
+use ComplexHeart\Infrastructure\Laravel\Persistence\EloquentCriteriaParser;
+use ComplexHeart\Infrastructure\Laravel\Persistence\Contracts\IlluminateCriteriaParser;
 use ComplexHeart\Tests\Fixtures\Domain\Contracts\UserRepository;
 use ComplexHeart\Tests\Fixtures\Domain\User;
 use ComplexHeart\Tests\Fixtures\Infrastructure\Persistence\Laravel\Sources\UserDatabaseSource as Table;
@@ -20,11 +20,11 @@ use Illuminate\Support\Collection;
  */
 class UsersEloquentRepository implements UserRepository
 {
-    private EloquentCriteriaParser $criteriaParser;
+    private IlluminateCriteriaParser $criteriaParser;
 
     public function __construct()
     {
-        $this->criteriaParser = new BasicCriteriaParser([
+        $this->criteriaParser = new EloquentCriteriaParser([
             'name' => 'first_name',
             'surname' => 'last_name'
         ]);

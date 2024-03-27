@@ -10,16 +10,16 @@ use ComplexHeart\Domain\Criteria\FilterGroup;
 use ComplexHeart\Domain\Criteria\Operator;
 use ComplexHeart\Domain\Criteria\Order;
 use ComplexHeart\Domain\Criteria\Page;
-use ComplexHeart\Infrastructure\Laravel\Persistence\Contracts\EloquentCriteriaParser;
+use ComplexHeart\Infrastructure\Laravel\Persistence\Contracts\IlluminateCriteriaParser;
 use Illuminate\Contracts\Database\Query\Builder;
 
 /**
- * Class DefaultCriteriaParser
+ * Class EloquentCriteriaParser
  *
  * @author Unay Santisteban <usantisteban@othercode.io>
  * @package ComplexHeart\Infrastructure\Laravel\Persistence
  */
-class BasicCriteriaParser implements EloquentCriteriaParser
+class EloquentCriteriaParser implements IlluminateCriteriaParser
 {
     /**
      * DefaultCriteriaParser constructor.
