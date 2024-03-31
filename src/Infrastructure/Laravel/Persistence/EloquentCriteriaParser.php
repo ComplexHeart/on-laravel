@@ -171,8 +171,11 @@ class EloquentCriteriaParser implements IlluminateCriteriaParser
      */
     private function applyPage(Builder $builder, Page $page): Builder
     {
-        $builder = $builder->limit($page->limit());
+        if ($page->limit() > 0) {
+            $builder = $builder->limit($page->limit());
+            $builder = $builder->offset($page->offset());
+        }
 
-        return $builder->offset($page->offset());
+        return $builder;
     }
 }

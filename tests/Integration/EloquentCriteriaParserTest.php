@@ -242,3 +242,14 @@ test('EloquentCriteriaParser should parse 2 or more filters groups using OR oper
     expect($builder->toRawSql())
         ->toBe('select * from "users" where "first_name" = \'Vincent\' or ("last_name" = \'Winnfield\') limit 25 offset 0');
 });
+
+test('EloquentCriteriaParser should ignore Page object if limit is 0.', function () {
+    $parser = new EloquentCriteriaParser();
+
+    $criteria = Criteria::default()
+        ->withPageLimit(0);
+    $builder = $parser->applyCriteria(UserDatabaseSource::query(), $criteria);
+
+    expect($builder->toRawSql())
+        ->toBe('select * from "users"');
+});
