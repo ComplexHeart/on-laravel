@@ -40,7 +40,7 @@ test('EloquentRepository should match given criteria.', function () {
         ->withFilterGroup(FilterGroup::create()
             ->addFilterEqual('name', 'Vincent'));
 
-    $repo = new  UsersEloquentRepository();
+    $repo = new UsersEloquentRepository();
     $users = $repo->match($criteria);
 
     expect($users)->toHaveCount(1);
