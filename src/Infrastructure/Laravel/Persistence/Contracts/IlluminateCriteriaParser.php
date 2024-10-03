@@ -6,6 +6,7 @@ namespace ComplexHeart\Infrastructure\Laravel\Persistence\Contracts;
 
 use ComplexHeart\Domain\Criteria\Criteria;
 use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 /**
  * Interface IlluminateCriteriaParser
@@ -20,7 +21,7 @@ interface IlluminateCriteriaParser
      *
      * @param  Builder  $builder
      * @param  Criteria  $criteria
-     * @return Builder
+     * @return Builder|LengthAwarePaginator
      */
-    public function applyCriteria(Builder $builder, Criteria $criteria): Builder;
+    public function applyCriteria(Builder $builder, Criteria $criteria): Builder|LengthAwarePaginator;
 }

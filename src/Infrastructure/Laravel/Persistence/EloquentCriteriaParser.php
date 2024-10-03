@@ -12,6 +12,7 @@ use ComplexHeart\Domain\Criteria\Order;
 use ComplexHeart\Domain\Criteria\Page;
 use ComplexHeart\Infrastructure\Laravel\Persistence\Contracts\IlluminateCriteriaParser;
 use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 /**
  * Class EloquentCriteriaParser
@@ -19,15 +20,17 @@ use Illuminate\Contracts\Database\Query\Builder;
  * @author Unay Santisteban <usantisteban@othercode.io>
  * @package ComplexHeart\Infrastructure\Laravel\Persistence
  */
-class EloquentCriteriaParser implements IlluminateCriteriaParser
+readonly class EloquentCriteriaParser implements IlluminateCriteriaParser
 {
     /**
      * DefaultCriteriaParser constructor.
      *
      * @param  array<string, string>  $filterAttributes
      */
-    public function __construct(private readonly array $filterAttributes = [])
-    {
+    public function __construct(
+        private array $filterAttributes = [],
+        private bool $paginator = false
+    ) {
     }
 
     /**
@@ -63,9 +66,9 @@ class EloquentCriteriaParser implements IlluminateCriteriaParser
      *
      * @param  Builder  $builder
      * @param  Criteria  $criteria
-     * @return Builder
+     * @return Builder|LengthAwarePaginator
      */
-    public function applyCriteria(Builder $builder, Criteria $criteria): Builder
+    public function applyCriteria(Builder $builder, Criteria $criteria): Builder|LengthAwarePaginator
     {
         $builder = $this->applyFilterGroups($builder, $criteria->groups());
         $builder = $this->applyOrdering($builder, $criteria->order());
@@ -144,10 +147,6 @@ class EloquentCriteriaParser implements IlluminateCriteriaParser
 
     /**
      * Apply the ordering settings into the given QueryBuilder.
-     *
-     * @param  Builder  $builder
-     * @param  Order  $ordering
-     * @return Builder
      */
     private function applyOrdering(Builder $builder, Order $ordering): Builder
     {
@@ -167,11 +166,18 @@ class EloquentCriteriaParser implements IlluminateCriteriaParser
      *
      * @param  Builder  $builder
      * @param  Page  $page
-     * @return Builder
+     * @return Builder|LengthAwarePaginator
      */
-    private function applyPage(Builder $builder, Page $page): Builder
+    private function applyPage(Builder $builder, Page $page): Builder|LengthAwarePaginator
     {
         if ($page->limit() > 0) {
+            if ($this->paginator) {
+                return $builder->paginate(
+                    perPage: $page->limit(),
+                    page: ($page->offset() / $page->limit()) + 1,
+                );
+            }
+
             $builder = $builder->limit($page->limit());
             $builder = $builder->offset($page->offset());
         }

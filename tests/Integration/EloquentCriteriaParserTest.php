@@ -6,6 +6,7 @@ use ComplexHeart\Domain\Criteria\Criteria;
 use ComplexHeart\Domain\Criteria\FilterGroup;
 use ComplexHeart\Infrastructure\Laravel\Persistence\EloquentCriteriaParser;
 use ComplexHeart\Tests\Fixtures\Infrastructure\Persistence\Laravel\Sources\UserDatabaseSource;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 beforeEach(function () {
     $this->createApplication();
@@ -252,4 +253,14 @@ test('EloquentCriteriaParser should ignore Page object if limit is 0.', function
 
     expect($builder->toRawSql())
         ->toBe('select * from "users"');
+});
+
+test('EloquentCriteriaParser should return a LengthAwarePaginator object if option is true.', function () {
+    $parser = new EloquentCriteriaParser([], true);
+
+    $criteria = Criteria::default()
+        ->withPageNumber(2, 25);
+    $page = $parser->applyCriteria(UserDatabaseSource::query(), $criteria);
+
+    expect($page)->toBeInstanceOf(LengthAwarePaginator::class);
 });
