@@ -10,7 +10,6 @@ use PHPUnit\Framework\TestCase as BaseTestCase;
  * Class TestCase
  *
  * @author Unay Santisteban <usantisteban@othercode.io>
- * @package ComplexHeart\Tests
  */
 class TestCase extends BaseTestCase
 {

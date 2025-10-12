@@ -11,13 +11,10 @@ use Illuminate\Database\Schema\Builder;
  * Class CreateUsersTable
  *
  * @author Unay Santisteban <usantisteban@othercode.io>
- * @package ComplexHeart\Tests\Fixtures\Database\Migrations
  */
 class CreateUsersTable
 {
-    public function __construct(private readonly Builder $builder)
-    {
-    }
+    public function __construct(private readonly Builder $builder) {}
 
     public function up(): void
     {

@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $bio
  *
  * @author Unay Santisteban <usantisteban@othercode.io>
- * @package ComplexHeart\Tests\Fixtures\Infrastructure\Persistence
  */
 class UserDatabaseSource extends Model implements UserSource
 {
