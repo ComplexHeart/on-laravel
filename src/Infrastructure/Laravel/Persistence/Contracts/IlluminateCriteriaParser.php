@@ -22,6 +22,7 @@ interface IlluminateCriteriaParser
      * - 'builder': Query builder with filters, ordering, and pagination applied
      * - 'total': Total count before pagination
      * - 'page': Page value object from criteria
+     * - 'currentPage': Current page number (1-indexed)
      *
      * @return array{builder: Builder, total: int, page: Page, currentPage: int}
      */
