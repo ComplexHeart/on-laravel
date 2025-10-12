@@ -8,7 +8,6 @@ namespace ComplexHeart\Tests\Fixtures\Domain\Contracts;
  * Interface UserSource
  *
  * @author Unay Santisteban <usantisteban@othercode.io>
- * @package ComplexHeart\Tests\Fixtures\Domain\Contracts
  */
 interface UserSource
 {

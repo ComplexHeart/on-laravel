@@ -12,13 +12,11 @@ use ComplexHeart\Domain\Criteria\Order;
 use ComplexHeart\Domain\Criteria\Page;
 use ComplexHeart\Infrastructure\Laravel\Persistence\Contracts\IlluminateCriteriaParser;
 use Illuminate\Contracts\Database\Query\Builder;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 /**
  * Class EloquentCriteriaParser
  *
  * @author Unay Santisteban <usantisteban@othercode.io>
- * @package ComplexHeart\Infrastructure\Laravel\Persistence
  */
 readonly class EloquentCriteriaParser implements IlluminateCriteriaParser
 {
@@ -29,9 +27,7 @@ readonly class EloquentCriteriaParser implements IlluminateCriteriaParser
      */
     public function __construct(
         private array $filterAttributes = [],
-        private bool $paginator = false
-    ) {
-    }
+    ) {}
 
     /**
      * Returns the persistence attribute name based on given
@@ -52,9 +48,6 @@ readonly class EloquentCriteriaParser implements IlluminateCriteriaParser
      * ]
      *
      * $this->filterAttribute('owner') returns 'user_id'
-     *
-     * @param  string  $fieldAttribute
-     * @return string
      */
     private function filterAttribute(string $fieldAttribute): string
     {
@@ -64,24 +57,36 @@ readonly class EloquentCriteriaParser implements IlluminateCriteriaParser
     /**
      * Apply a criteria into the given Query Builder.
      *
-     * @param  Builder  $builder
-     * @param  Criteria  $criteria
-     * @return Builder|LengthAwarePaginator<int, mixed>
+     * @return array{builder: Builder, total: int, page: Page, currentPage: int}
      */
-    public function applyCriteria(Builder $builder, Criteria $criteria): Builder|LengthAwarePaginator
+    public function applyCriteria(Builder $builder, Criteria $criteria): array
     {
         $builder = $this->applyFilterGroups($builder, $criteria->groups());
         $builder = $this->applyOrdering($builder, $criteria->order());
 
-        return $this->applyPage($builder, $criteria->page());
+        // Get total BEFORE applying limit/offset
+        $total = $builder->count();
+
+        // Apply pagination
+        $builder = $this->applyPage($builder, $criteria->page());
+
+        // Calculate current page
+        $page = $criteria->page();
+        $limit = $page->limit();
+        $currentPage = $limit > 0 ? (int) (($page->offset() / $limit) + 1) : 1;
+
+        return [
+            'builder' => $builder,
+            'total' => $total,
+            'page' => $page,
+            'currentPage' => $currentPage,
+        ];
     }
 
     /**
      * Apply the given list of filter groups into the given QueryBuilder.
      *
-     * @param  Builder  $builder
      * @param  array<int, FilterGroup>  $groups
-     * @return Builder
      */
     private function applyFilterGroups(Builder $builder, array $groups): Builder
     {
@@ -99,9 +104,7 @@ readonly class EloquentCriteriaParser implements IlluminateCriteriaParser
     /**
      * Apply a set of filters into the given QueryBuilder.
      *
-     * @param  Builder  $builder
      * @param  FilterGroup<Filter>  $filters
-     * @return Builder
      */
     private function applyFilters(Builder $builder, FilterGroup $filters): Builder
     {
@@ -114,10 +117,6 @@ readonly class EloquentCriteriaParser implements IlluminateCriteriaParser
 
     /**
      * Apply a filter into the given QueryBuilder.
-     *
-     * @param  Builder  $builder
-     * @param  Filter  $filter
-     * @return Builder
      */
     private function applyFilter(Builder $builder, Filter $filter): Builder
     {
@@ -130,11 +129,11 @@ readonly class EloquentCriteriaParser implements IlluminateCriteriaParser
             case Operator::NOT_IN:
                 $builder->whereNotIn($field, $filter->value());
                 break;
-            // redirect the contains operator to like.
+                // redirect the contains operator to like.
             case Operator::CONTAINS:
                 $builder->where($field, Operator::LIKE->value, $filter->value());
                 break;
-            // redirect the not contains operator to not like.
+                // redirect the not contains operator to not like.
             case Operator::NOT_CONTAINS:
                 $builder->where($field, Operator::NOT_LIKE->value, $filter->value());
                 break;
@@ -150,7 +149,7 @@ readonly class EloquentCriteriaParser implements IlluminateCriteriaParser
      */
     private function applyOrdering(Builder $builder, Order $ordering): Builder
     {
-        if (!$ordering->isNone()) {
+        if (! $ordering->isNone()) {
             $filterAttribute = $this->filterAttribute($ordering->by());
 
             $builder = ($ordering->isRandom())
@@ -163,21 +162,10 @@ readonly class EloquentCriteriaParser implements IlluminateCriteriaParser
 
     /**
      * Apply the page settings (limit and offset) into the given QueryBuilder.
-     *
-     * @param  Builder  $builder
-     * @param  Page  $page
-     * @return Builder|LengthAwarePaginator<int, mixed>
      */
-    private function applyPage(Builder $builder, Page $page): Builder|LengthAwarePaginator
+    private function applyPage(Builder $builder, Page $page): Builder
     {
         if ($page->limit() > 0) {
-            if ($this->paginator) {
-                return $builder->paginate(
-                    perPage: $page->limit(),
-                    page: ($page->offset() / $page->limit()) + 1,
-                );
-            }
-
             $builder = $builder->limit($page->limit());
             $builder = $builder->offset($page->offset());
         }

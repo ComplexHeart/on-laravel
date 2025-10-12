@@ -11,13 +11,12 @@ use Illuminate\Database\Capsule\Manager as Capsule;
  * Trait CreatesApplication
  *
  * @author Unay Santisteban <usantisteban@othercode.io>
- * @package ComplexHeart\Tests
  */
 trait CreatesApplication
 {
     private function bootEloquent(): void
     {
-        $capsule = new Capsule();
+        $capsule = new Capsule;
         $capsule->addConnection([
             'driver' => 'sqlite',
             'database' => ':memory:',
@@ -38,8 +37,6 @@ trait CreatesApplication
      * Currently this method only boots the database and
      * eloquent system. In future iterations this may really
      * boot a complete Laravel application instance.
-     *
-     * @return void
      */
     public function createApplication(): void
     {

@@ -7,14 +7,13 @@ namespace ComplexHeart\Tests\Fixtures\Domain;
 use ComplexHeart\Domain\Contracts\Model\Aggregate;
 use ComplexHeart\Domain\Contracts\Model\Identifier;
 use ComplexHeart\Domain\Contracts\ServiceBus\EventBus;
-use ComplexHeart\Tests\Fixtures\Domain\Contracts\UserSource;
 use ComplexHeart\Domain\Model\ValueObjects\UUIDValue as Id;
+use ComplexHeart\Tests\Fixtures\Domain\Contracts\UserSource;
 
 /**
  * Class User
  *
  * @author Unay Santisteban <usantisteban@othercode.io>
- * @package ComplexHeart\Tests\Fixtures\Domain
  */
 class User implements Aggregate
 {
@@ -24,8 +23,7 @@ class User implements Aggregate
         public string $surname,
         public string $email,
         public string $bio,
-    ) {
-    }
+    ) {}
 
     public static function fromSource(UserSource $source): self
     {
@@ -47,5 +45,4 @@ class User implements Aggregate
     {
         // TODO: Implement publishDomainEvents() method.
     }
-
 }
