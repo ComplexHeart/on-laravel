@@ -21,7 +21,7 @@ interface IlluminateCriteriaParser
      *
      * @param  Builder  $builder
      * @param  Criteria  $criteria
-     * @return Builder|LengthAwarePaginator
+     * @return Builder|LengthAwarePaginator<int, mixed>
      */
     public function applyCriteria(Builder $builder, Criteria $criteria): Builder|LengthAwarePaginator;
 }

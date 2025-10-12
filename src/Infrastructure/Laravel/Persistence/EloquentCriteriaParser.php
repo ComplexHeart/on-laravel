@@ -66,7 +66,7 @@ readonly class EloquentCriteriaParser implements IlluminateCriteriaParser
      *
      * @param  Builder  $builder
      * @param  Criteria  $criteria
-     * @return Builder|LengthAwarePaginator
+     * @return Builder|LengthAwarePaginator<int, mixed>
      */
     public function applyCriteria(Builder $builder, Criteria $criteria): Builder|LengthAwarePaginator
     {
@@ -166,7 +166,7 @@ readonly class EloquentCriteriaParser implements IlluminateCriteriaParser
      *
      * @param  Builder  $builder
      * @param  Page  $page
-     * @return Builder|LengthAwarePaginator
+     * @return Builder|LengthAwarePaginator<int, mixed>
      */
     private function applyPage(Builder $builder, Page $page): Builder|LengthAwarePaginator
     {
