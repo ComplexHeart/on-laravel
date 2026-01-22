@@ -16,7 +16,7 @@ trait CreatesApplication
 {
     private function bootEloquent(): void
     {
-        $capsule = new Capsule;
+        $capsule = new Capsule();
         $capsule->addConnection([
             'driver' => 'sqlite',
             'database' => ':memory:',

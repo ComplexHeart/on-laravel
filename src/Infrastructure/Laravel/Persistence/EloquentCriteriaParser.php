@@ -27,7 +27,8 @@ readonly class EloquentCriteriaParser implements IlluminateCriteriaParser
      */
     public function __construct(
         private array $filterAttributes = [],
-    ) {}
+    ) {
+    }
 
     /**
      * Returns the persistence attribute name based on given

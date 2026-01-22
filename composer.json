@@ -2,7 +2,7 @@
   "name": "complex-heart/on-laravel",
   "description": "Domain driven design tools for Laravel.",
   "type": "library",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "authors": [
     {
       "name": "Unay Santisteban",
@@ -12,8 +12,7 @@
   "minimum-stability": "stable",
   "require": {
     "php": "^8.2.0",
-    "complex-heart/sdk": "^2.0.0",
-    "complex-heart/criteria": "^4.1",
+    "complex-heart/sdk": "^3.0.0",
     "laravel/framework": "^11.0.0"
   },
   "require-dev": {
@@ -34,13 +33,10 @@
     }
   },
   "scripts": {
-    "test": "vendor/bin/pest --configuration=phpunit.xml --coverage-clover=coverage.xml --log-junit=test.xml",
-    "test-cov": "vendor/bin/pest --configuration=phpunit.xml --coverage-html=coverage",
-    "analyse": "vendor/bin/phpstan analyse src --no-progress --level=8",
-    "check": [
-      "@analyse",
-      "@test"
-    ]
+    "test": "vendor/bin/pest --configuration=phpunit.xml --coverage --coverage-clover=coverage.xml --log-junit=test.xml",
+    "analyse": "vendor/bin/phpstan analyse --no-progress --memory-limit=4G",
+    "pint-test": "vendor/bin/pint --preset=psr12 --test",
+    "pint": "vendor/bin/pint --preset=psr12"
   },
   "config": {
     "allow-plugins": {

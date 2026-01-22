@@ -14,7 +14,9 @@ use Illuminate\Database\Schema\Builder;
  */
 class CreateUsersTable
 {
-    public function __construct(private readonly Builder $builder) {}
+    public function __construct(private readonly Builder $builder)
+    {
+    }
 
     public function up(): void
     {

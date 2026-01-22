@@ -13,7 +13,7 @@ beforeEach(function () {
 });
 
 test('EloquentCriteriaParser should parse empty criteria.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default();
     $result = $parser->applyCriteria(UserDatabaseSource::query(), $criteria);
@@ -25,7 +25,7 @@ test('EloquentCriteriaParser should parse empty criteria.', function () {
 });
 
 test('EloquentCriteriaParser should parse equal filters.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default()
         ->withFilterGroup(FilterGroup::create()
@@ -37,7 +37,7 @@ test('EloquentCriteriaParser should parse equal filters.', function () {
 });
 
 test('EloquentCriteriaParser should parse not equal filter.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default()
         ->withFilterGroup(FilterGroup::create()
@@ -49,7 +49,7 @@ test('EloquentCriteriaParser should parse not equal filter.', function () {
 });
 
 test('EloquentCriteriaParser should parse greater than filter.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default()
         ->withFilterGroup(FilterGroup::create()
@@ -61,7 +61,7 @@ test('EloquentCriteriaParser should parse greater than filter.', function () {
 });
 
 test('EloquentCriteriaParser should parse greater or equal than filter.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default()
         ->withFilterGroup(FilterGroup::create()
@@ -73,7 +73,7 @@ test('EloquentCriteriaParser should parse greater or equal than filter.', functi
 });
 
 test('EloquentCriteriaParser should parse less than filter.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default()
         ->withFilterGroup(FilterGroup::create()
@@ -85,7 +85,7 @@ test('EloquentCriteriaParser should parse less than filter.', function () {
 });
 
 test('EloquentCriteriaParser should parse less or equal filter.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default()
         ->withFilterGroup(FilterGroup::create()
@@ -97,7 +97,7 @@ test('EloquentCriteriaParser should parse less or equal filter.', function () {
 });
 
 test('EloquentCriteriaParser should parse in filter.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default()
         ->withFilterGroup(FilterGroup::create()
@@ -109,7 +109,7 @@ test('EloquentCriteriaParser should parse in filter.', function () {
 });
 
 test('EloquentCriteriaParser should parse not in filter.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default()
         ->withFilterGroup(FilterGroup::create()
@@ -121,7 +121,7 @@ test('EloquentCriteriaParser should parse not in filter.', function () {
 });
 
 test('EloquentCriteriaParser should parse like filter.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default()
         ->withFilterGroup(FilterGroup::create()
@@ -133,7 +133,7 @@ test('EloquentCriteriaParser should parse like filter.', function () {
 });
 
 test('EloquentCriteriaParser should parse not like filter.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default()
         ->withFilterGroup(FilterGroup::create()
@@ -145,7 +145,7 @@ test('EloquentCriteriaParser should parse not like filter.', function () {
 });
 
 test('EloquentCriteriaParser should parse contains (to like) filter.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default()
         ->withFilterGroup(FilterGroup::create()
@@ -157,7 +157,7 @@ test('EloquentCriteriaParser should parse contains (to like) filter.', function 
 });
 
 test('EloquentCriteriaParser should parse not contains (to not like) filter.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default()
         ->withFilterGroup(FilterGroup::create()
@@ -184,7 +184,7 @@ test('EloquentCriteriaParser should parse domain mapped attributes.', function (
 });
 
 test('EloquentCriteriaParser should parse ASC ordering.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default()
         ->withOrderType('asc')
@@ -196,7 +196,7 @@ test('EloquentCriteriaParser should parse ASC ordering.', function () {
 });
 
 test('EloquentCriteriaParser should parse DESC ordering.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default()
         ->withOrderType('desc')
@@ -208,7 +208,7 @@ test('EloquentCriteriaParser should parse DESC ordering.', function () {
 });
 
 test('EloquentCriteriaParser should parse RANDOM ordering.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default()
         ->withOrderType('random')
@@ -220,7 +220,7 @@ test('EloquentCriteriaParser should parse RANDOM ordering.', function () {
 });
 
 test('EloquentCriteriaParser should parse 2 or more filters using AND operator.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default()
         ->withFilterGroup(FilterGroup::create()
@@ -233,7 +233,7 @@ test('EloquentCriteriaParser should parse 2 or more filters using AND operator.'
 });
 
 test('EloquentCriteriaParser should parse 2 or more filters groups using OR operator.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default()
         ->withFilterGroup(FilterGroup::create()
@@ -247,7 +247,7 @@ test('EloquentCriteriaParser should parse 2 or more filters groups using OR oper
 });
 
 test('EloquentCriteriaParser should ignore Page object if limit is 0.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default()
         ->withPageLimit(0);
@@ -258,7 +258,7 @@ test('EloquentCriteriaParser should ignore Page object if limit is 0.', function
 });
 
 test('EloquentCriteriaParser should return array with builder, total, and page.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     $criteria = Criteria::default()
         ->withPageNumber(2, 25);
@@ -271,7 +271,7 @@ test('EloquentCriteriaParser should return array with builder, total, and page.'
 });
 
 test('EloquentCriteriaParser should calculate currentPage correctly.', function () {
-    $parser = new EloquentCriteriaParser;
+    $parser = new EloquentCriteriaParser();
 
     // Page 1
     $criteria = Criteria::default()->withPageNumber(1, 10);

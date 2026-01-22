@@ -29,7 +29,7 @@ beforeEach(function () {
 test('EloquentRepository should match given empty criteria and return PaginatedResult.', function () {
     $criteria = Criteria::default();
 
-    $repo = new UsersEloquentRepository;
+    $repo = new UsersEloquentRepository();
     $result = $repo->match($criteria);
 
     expect($result)->toBeInstanceOf(PaginatedResult::class)
@@ -45,7 +45,7 @@ test('EloquentRepository should match given criteria and return PaginatedResult.
         ->withFilterGroup(FilterGroup::create()
             ->addFilterEqual('name', 'Vincent'));
 
-    $repo = new UsersEloquentRepository;
+    $repo = new UsersEloquentRepository();
     $result = $repo->match($criteria);
 
     expect($result)->toBeInstanceOf(PaginatedResult::class)
@@ -59,7 +59,7 @@ test('EloquentRepository should match given criteria and return empty PaginatedR
         ->withFilterGroup(FilterGroup::create()
             ->addFilterNotLike('email', '%@complexheart.com'));
 
-    $repo = new UsersEloquentRepository;
+    $repo = new UsersEloquentRepository();
     $result = $repo->match($criteria);
 
     expect($result)->toBeInstanceOf(PaginatedResult::class)
@@ -71,7 +71,7 @@ test('EloquentRepository should match given criteria and return empty PaginatedR
 test('PaginatedResult extends Collection and supports collection methods.', function () {
     $criteria = Criteria::default();
 
-    $repo = new UsersEloquentRepository;
+    $repo = new UsersEloquentRepository();
     $result = $repo->match($criteria);
 
     // Should support Collection methods
@@ -95,7 +95,7 @@ test('PaginatedResult calculates pagination metadata correctly.', function () {
 
     $criteria = Criteria::default()->withPageNumber(2, 10);
 
-    $repo = new UsersEloquentRepository;
+    $repo = new UsersEloquentRepository();
     $result = $repo->match($criteria);
 
     expect($result->total())->toBe(32) // 30 + 2 from beforeEach

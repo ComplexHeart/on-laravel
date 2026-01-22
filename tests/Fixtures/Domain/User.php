@@ -6,7 +6,7 @@ namespace ComplexHeart\Tests\Fixtures\Domain;
 
 use ComplexHeart\Domain\Contracts\Model\Aggregate;
 use ComplexHeart\Domain\Contracts\Model\Identifier;
-use ComplexHeart\Domain\Contracts\ServiceBus\EventBus;
+use ComplexHeart\Domain\Contracts\Events\EventBus;
 use ComplexHeart\Domain\Model\ValueObjects\UUIDValue as Id;
 use ComplexHeart\Tests\Fixtures\Domain\Contracts\UserSource;
 
@@ -23,7 +23,8 @@ class User implements Aggregate
         public string $surname,
         public string $email,
         public string $bio,
-    ) {}
+    ) {
+    }
 
     public static function fromSource(UserSource $source): self
     {
