@@ -17,7 +17,7 @@
   },
   "require-dev": {
     "pestphp/pest": "*",
-    "pestphp/pest-plugin-faker": "^2.0",
+    "pestphp/pest-plugin-faker": "^2.0 || ^3.0",
     "phpstan/phpstan": "*",
     "mockery/mockery": "^1.6",
     "laravel/pint": "^1.25"
