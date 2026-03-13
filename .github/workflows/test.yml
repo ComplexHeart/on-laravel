@@ -68,7 +68,7 @@ jobs:
         continue-on-error: true
 
   test:
-    name: Test (PHP ${{ matrix.php-version }})
+    name: Test (PHP ${{ matrix.php-version }}, Laravel ${{ matrix.laravel-version }})
     runs-on: ubuntu-latest
     needs: [lint]
 
@@ -76,6 +76,7 @@ jobs:
       fail-fast: false
       matrix:
         php-version: ["8.2", "8.3", "8.4"]
+        laravel-version: ["11", "12"]
 
     steps:
       - name: Checkout
@@ -92,17 +93,19 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.composer/cache
-          key: php-${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}
-          restore-keys: php-${{ matrix.php-version }}-composer-
+          key: php-${{ matrix.php-version }}-L${{ matrix.laravel-version }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: php-${{ matrix.php-version }}-L${{ matrix.laravel-version }}-composer-
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress
+        run: |
+          composer require "laravel/framework:^${{ matrix.laravel-version }}.0" --no-update
+          composer install --prefer-dist --no-progress
 
       - name: Run tests
         run: composer test
 
       - name: Upload coverage artifact
-        if: matrix.php-version == '8.4'
+        if: matrix.php-version == '8.4' && matrix.laravel-version == '12'
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
