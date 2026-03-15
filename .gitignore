@@ -9,3 +9,6 @@ test.xml
 .phpunit.cache/
 .phpunit.result.cache
 composer.lock
+/.claude
+/.serena
+/.omc
