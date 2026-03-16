@@ -18,6 +18,7 @@ composer require complex-heart/on-laravel
 
 - [Bounded Context Service Provider](https://github.com/ComplexHeart/on-laravel/wiki/Bounded-Context-Service-Provider)
 - [Illuminate Event Bus](https://github.com/ComplexHeart/on-laravel/wiki/Illuminate-Event-Bus)
+- [Eloquent Factory](https://github.com/ComplexHeart/on-laravel/wiki/Eloquent-Factory)
 - [Eloquent Criteria Parser](https://github.com/ComplexHeart/on-laravel/wiki/Eloquent-Criteria-Parser)
 - [HTTP Request as Criteria Source](https://github.com/ComplexHeart/on-laravel/wiki/HTTP-Request-as-Criteria-Source)
 
