@@ -75,8 +75,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: ["8.2", "8.3", "8.4"]
-        laravel-version: ["11", "12"]
+        php-version: ["8.2", "8.3", "8.4", "8.5"]
+        laravel-version: ["12", "13"]
+        exclude:
+          # Laravel 13 requires PHP >= 8.3
+          - php-version: "8.2"
+            laravel-version: "13"
 
     steps:
       - name: Checkout
@@ -105,7 +109,7 @@ jobs:
         run: composer test
 
       - name: Upload coverage artifact
-        if: matrix.php-version == '8.4' && matrix.laravel-version == '12'
+        if: matrix.php-version == '8.4' && matrix.laravel-version == '13'
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
